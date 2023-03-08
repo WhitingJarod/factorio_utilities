@@ -37,7 +37,7 @@ lazy_static! {
                             if let Ok(list) = list {
                                 for item in list {
                                     let item = item.to_item();
-                                    if let Some(old) = map.insert(item.uuid, item) {
+                                    if let Some(old) = map.insert(item.hash_id, item) {
                                         println!(
                                             "Duplicate entry found for {} when reading {}",
                                             old.id, path_str

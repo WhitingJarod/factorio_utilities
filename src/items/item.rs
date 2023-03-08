@@ -5,29 +5,25 @@ use std::{
     hash::{Hash, Hasher},
 };
 
-#[derive(Debug, Deserialize, Eq, PartialEq)]
-pub struct SerializableItem {
-    pub id: String,
-    pub name: String,
-    pub prototype: String,
-    pub stack_size: u16,
-    pub is_fluid: bool,
-}
+use crate::utils::FactorioType;
 
-impl SerializableItem {
-    pub fn to_item(self) -> Item {
-        Item::new(self)
-    }
+#[derive(Deserialize)]
+pub struct SerializableItem {
+    id: String,
+    name: String,
+    prototype: String,
+    stack_size: u16,
+    is_fluid: bool,
 }
 
 pub struct Item {
-    pub uuid: u64,
-    pub id: String,
-    pub name: String,
-    pub prototype: u64,
-    pub stack_size: u16,
-    pub is_fluid: bool,
-    pub icon: String,
+    hash_id: u64,
+    id: String,
+    name: String,
+    prototype: u64,
+    stack_size: u16,
+    is_fluid: bool,
+    icon: String,
 }
 
 impl Item {
@@ -37,13 +33,13 @@ impl Item {
         let hash_id = hasher.finish();
         let mut hasher = DefaultHasher::new();
         base.prototype.hash(&mut hasher);
-        let hash_proto = hasher.finish();
+        let proto = hasher.finish();
         let icon = format!("{}.png", base.id.clone());
         Item {
-            uuid: hash_id,
+            hash_id,
             id: base.id,
             name: base.name,
-            prototype: hash_proto,
+            prototype: proto,
             stack_size: base.stack_size,
             is_fluid: base.is_fluid,
             icon: icon,
@@ -53,7 +49,7 @@ impl Item {
 
 impl Display for Item {
     fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        f.write_fmt(format_args!("{:#018x}: {}", self.uuid, self.id))?;
+        f.write_fmt(format_args!("{:#018x}: {}", self.hash_id, self.id))?;
         //f.write_str(self.name.as_str())?;
         return Result::Ok(());
     }
