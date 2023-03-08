@@ -1,0 +1,44 @@
+[
+    {
+        "id": "burner-inserter",
+        "name": "Burner inserter",
+        "proto": "inserter",
+        "stack_size": "50",
+    },
+    {
+        "id": "inserter",
+        "name": "Inserter",
+        "proto": "inserter",
+        "stack_size": "50",
+    },
+    {
+        "id": "long-handed-inserter",
+        "name": "Long-handed inserter",
+        "proto": "inserter",
+        "stack_size": "50",
+    },
+    {
+        "id": "fast-inserter",
+        "name": "Fast inserter",
+        "proto": "inserter",
+        "stack_size": "50",
+    },
+    {
+        "id": "filter-inserter",
+        "name": "Filter inserter",
+        "proto": "inserter",
+        "stack_size": "50",
+    },
+    {
+        "id": "stack-inserter",
+        "name": "Stack inserter",
+        "proto": "inserter",
+        "stack_size": "50",
+    },
+    {
+        "id": "stack-filter-inserter",
+        "name": "Stack filter inserter",
+        "proto": "inserter",
+        "stack_size": "50",
+    },
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "id": "pipe",
+        "name": "Pipe",
+        "stack_size": "100",
+    },
+    {
+        "id": "pipe-to-ground",
+        "name": "Pipe to ground",
+        "stasck_size": "50",
+    },
+    {
+        "id": "pump",
+        "name": "Pump",
+        "stack_size": "50",
+    }
+]

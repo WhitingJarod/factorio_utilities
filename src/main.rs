@@ -1,8 +1,14 @@
+mod fluids;
 mod items;
+mod recipes;
+mod utils;
+
+use fluids::FLUIDS;
 use items::ITEMS;
+use recipes::RECIPES;
+use utils::FactorioType;
+
 fn main() {
-    for key in ITEMS.keys() {
-        let item = &*ITEMS.get(key).unwrap();
-        println!("{}", item);
+    for key in FLUIDS.keys() {
     }
 }

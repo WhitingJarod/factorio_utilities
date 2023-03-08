@@ -1,19 +1,25 @@
+use colored::Colorize;
 use ron::error::SpannedResult;
-use serde::{Deserializer, Deserialize};
-use std::{collections::HashMap, fs, fs::File, io::Read};
-use termcolor::{Color, ColorChoice, ColorSpec, StandardStream, WriteColor};
+use std::{collections::HashMap, fs, fs::File, io::Read, result::Result};
 
 pub trait FactorioType {
-    fn get_hash_id(&self) -> u64;
-    fn get_string_id(&self) -> &String;
+    fn get_id_hash(&self) -> u64;
+    fn get_id(&self) -> &String;
+    fn get_name(&self) -> &String;
+    fn get_proto_hash(&self) -> u64;
+    fn get_proto(&self) -> &String;
+    fn get_icon(&self) -> &String;
 }
 
-pub fn read_to_hashmap<'a, T: FactorioType + Deserialize<'a>>(directory: &str) -> HashMap<u64, T> {
-    let mut stdout = StandardStream::stdout(ColorChoice::Always);
-    let result = stdout.set_color(ColorSpec::new().set_fg(Some(Color::Rgb(255, 195, 63))));
-    if let Err(_) = result {
-        println!("Unable to set output color with termcolor.");
-    }
+pub trait DynamicDeserialize {
+    fn deserialize(map: HashMap<String, String>) -> Result<Self, String>
+    where
+        Self: Sized;
+}
+
+pub fn read_to_hashmap<'a, T: FactorioType + DynamicDeserialize>(
+    directory: &str,
+) -> HashMap<u64, T> {
     let mut map = HashMap::new();
     let paths = fs::read_dir(directory);
     if let Ok(paths) = paths {
@@ -26,7 +32,10 @@ pub fn read_to_hashmap<'a, T: FactorioType + Deserialize<'a>>(directory: &str) -
                 if let Some(p) = result {
                     path_str = p;
                 } else {
-                    println!("Unable to get displayable file path for debug output.");
+                    println!(
+                        "{}",
+                        "Unable to get displayable file path for debug output".truecolor(255, 195, 63)
+                    );
                     path_str = "<unknown directory>";
                 }
                 let file = File::open(path);
@@ -34,33 +43,52 @@ pub fn read_to_hashmap<'a, T: FactorioType + Deserialize<'a>>(directory: &str) -
                     let mut input = String::new();
                     let result = file.read_to_string(&mut input);
                     if let Ok(_) = result {
-                        let list: SpannedResult<Vec<T>> = ron::from_str(&input);
+                        let list: SpannedResult<Vec<HashMap<String, String>>> =
+                            ron::from_str(&input);
                         if let Ok(list) = list {
                             for item in list {
-                                if let Some(old) = map.insert(item.get_hash_id(), item) {
-                                    println!(
-                                        "Duplicate entry found for {} when reading {}",
-                                        old.get_string_id(), path_str
-                                    );
+                                let item = T::deserialize(item);
+                                match item {
+                                    Ok(item) => {
+                                        if let Some(old) = map.insert(item.get_id_hash(), item) {
+                                            println!(
+                                                "{}{}{}{}",
+                                                "Duplicate entry found for ".truecolor(255, 195, 63),
+                                                old.get_id().bright_yellow(),
+                                                " when reading ".truecolor(255, 195, 63),
+                                                path_str.bright_yellow(),
+                                            );
+                                        }
+                                    }
+                                    Err(error) => println!(
+                                        "{}{}{}{}",
+                                        "Encountered error while parsing ".truecolor(255, 195, 63),
+                                        path_str.bright_yellow(),
+                                        ": ".truecolor(255, 195, 63),
+                                        error
+                                    ),
                                 }
                             }
                         } else {
                             println!(
-                                "Unable to parse {}. Possible syntax or spelling error.",
-                                path_str
+                                "{}{}{}",
+                                "Unable to parse ".truecolor(255, 195, 63),
+                                path_str.bright_yellow(),
+                                ". Possible syntax or spelling error".truecolor(255, 195, 63),
                             );
                         }
                     } else {
-                        println!("Unable to read contents of {} as a string.", path_str);
+                        println!(
+                            "{}{}{}",
+                            "Unable to read contents of ".truecolor(255, 195, 63),
+                            path_str.bright_yellow(),
+                            " as a string".truecolor(255, 195, 63)
+                        );
                     }
                 } else {
                     println!("Unable to open {}", path_str);
                 }
             }
-        }
-        let result = stdout.set_color(ColorSpec::new().set_fg(None));
-        if let Err(_) = result {
-            println!("Unable to set output color with termcolor.");
         }
     }
     map

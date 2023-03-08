@@ -1,0 +1,7 @@
+[
+    {
+        "id": "iron-plate",
+        "item_ingredients": "iron-ore: 1",
+        "item_products": "iron-plate: 1",
+    }
+]

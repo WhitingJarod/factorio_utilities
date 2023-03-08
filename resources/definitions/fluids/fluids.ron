@@ -1,0 +1,26 @@
+[
+    {
+        "id": "crude-oil",
+    },
+    {
+        "id": "heavy-oil",
+    },
+    {
+        "id": "light-oil",
+    },
+    {
+        "id": "lubricant",
+    },
+    {
+        "id": "petroleum-gas",
+    },
+    {
+        "id": "sulfuric-acid",
+    },
+    {
+        "id": "water",
+    },
+    {
+        "id": "steam",
+    },
+]

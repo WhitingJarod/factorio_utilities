@@ -1,0 +1,25 @@
+[
+    {
+        "id": "wooden-chest",
+        "name": "Wooden chest",
+        "proto": "container",
+        "stack_size": "50",
+    },
+    {
+        "id": "iron-chest",
+        "name": "Iron chest",
+        "proto": "container",
+        "stack_size": "50",
+    },
+    {
+        "id": "steel-chest",
+        "name": "Steel chest",
+        "proto": "container",
+        "stack_size": "50",
+    },
+    {
+        "id": "storage-tank",
+        "name": "Storage tank",
+        "stack_size": "50",
+    },
+]

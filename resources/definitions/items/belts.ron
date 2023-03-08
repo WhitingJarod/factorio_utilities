@@ -1,0 +1,56 @@
+[
+    {
+        "id": "transport-belt",
+        "name": "Transport belt",
+        "proto": "transport-belt",
+        "stack_size": "100",
+    },
+    {
+        "id": "fast-transport-belt",
+        "name": "Fast transport belt",
+        "proto": "transport-belt",
+        "stack_size": "100",
+    },
+    {
+        "id": "express-transport-belt",
+        "name": "Express transport belt",
+        "proto": "transport-belt",
+        "stack_size": "100",
+    },
+    {
+        "id": "underground-belt",
+        "name": "Underground belt",
+        "proto": "underground-belt",
+        "stack_size": "50",
+    },
+    {
+        "id": "fast-underground-belt",
+        "name": "Fast underground belt",
+        "proto": "underground-belt",
+        "stack_size": "50",
+    },
+    {
+        "id": "express-underground-belt",
+        "name": "Express underground belt",
+        "proto": "underground-belt",
+        "stack_size": "50",
+    },
+    {
+        "id": "splitter",
+        "name": "Splitter",
+        "proto": "splitter",
+        "stack_size": "50",
+    },
+    {
+        "id": "fast-splitter",
+        "name": "Fast Splitter",
+        "proto": "splitter",
+        "stack_size": "50",
+    },
+    {
+        "id": "express-splitter",
+        "name": "Express Splitter",
+        "proto": "splitter",
+        "stack_size": "50",
+    },
+]
