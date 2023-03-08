@@ -1,0 +1,30 @@
+[
+    (
+        id: "small-electric-pole",
+        name: "Small electric pole",
+        prototype: "electric-pole",
+        stack_size: 50,
+        is_fluid: false,
+    ),
+    (
+        id: "medium-electric-pole",
+        name: "Medium electric pole",
+        prototype: "electric-pole",
+        stack_size: 50,
+        is_fluid: false,
+    ),
+    (
+        id: "big-electric-pole",
+        name: "Big electric pole",
+        prototype: "electric-pole",
+        stack_size: 50,
+        is_fluid: false,
+    ),
+    (
+        id: "substation",
+        name: "Substation",
+        prototype: "electric-pole",
+        stack_size: 50,
+        is_fluid: false,
+    ),
+]

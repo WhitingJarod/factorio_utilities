@@ -1,0 +1,30 @@
+[
+    (
+        id: "wooden-chest",
+        name: "Wooden chest",
+        prototype: "container",
+        stack_size: 50,
+        is_fluid: false,
+    ),
+    (
+        id: "iron-chest",
+        name: "Iron chest",
+        prototype: "container",
+        stack_size: 50,
+        is_fluid: false,
+    ),
+    (
+        id: "steel-chest",
+        name: "Steel chest",
+        prototype: "container",
+        stack_size: 50,
+        is_fluid: false,
+    ),
+    (
+        id: "storage-tank",
+        name: "Storage tank",
+        prototype: "storage-tank",
+        stack_size: 50,
+        is_fluid: false,
+    ),
+]

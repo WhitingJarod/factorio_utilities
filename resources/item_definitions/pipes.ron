@@ -1,0 +1,23 @@
+[
+    (
+        id: "pipe",
+        name: "Pipe",
+        prototype: "pipe",
+        stack_size: 100,
+        is_fluid: false,
+    ),
+    (
+        id: "pipe-to-ground",
+        name: "Pipe to ground",
+        prototype: "pipe-to-ground",
+        stack_size: 50,
+        is_fluid: false,
+    ),
+    (
+        id: "pump",
+        name: "Pump",
+        prototype: "pump",
+        stack_size: 50,
+        is_fluid: false,
+    )
+]
