@@ -17,6 +17,13 @@ pub struct Fluid {
 }
 
 impl FactorioType for Fluid {
+    fn get_id_hash(&self) -> u64 {
+        self.id_hash
+    }
+
+    fn get_id(&self) -> &String {
+        &self.id
+    }
 }
 
 impl DynamicDeserialize for Fluid {
