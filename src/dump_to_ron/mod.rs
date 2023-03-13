@@ -1,8 +1,11 @@
-use std::{process::Command, ffi::OsString, fs, io::ErrorKind};
-
-use serde_json;
+use serde_json::{Result, Value};
+use std::{ffi::OsString, fs, io::ErrorKind, process::Command};
 use steamlocate::SteamDir;
-use crate::{common::log::{LogResult, LogType}, log_info};
+
+use crate::{
+    common::log::{LogResult, LogType},
+    log_info,
+};
 
 fn run_with_arg(arg: &str) -> LogResult<String> {
     let steam_dir = SteamDir::locate();
@@ -37,6 +40,21 @@ fn get_user_data_dir() -> OsString {
     path
 }
 
+fn read_json(dir: &OsString) -> LogResult<Value> {
+    log_info!("Attempting to parse {} as json", dir.to_str().unwrap_or("<unknown file>"));
+    let result = fs::read_to_string(dir);
+    if let Ok(file) = result {
+        let json = serde_json::from_str(&file);
+        if let Ok(json) = json {
+            return Ok(json);
+        } else {
+            return Err(LogType::Warning("Error not implemented yet".to_string()));
+        }
+    } else {
+        return Err(LogType::Warning("Error not implemented yet 2".to_string()));
+    }
+}
+
 pub fn check_for_updates() {
     todo!();
 }
@@ -53,10 +71,15 @@ pub fn update() {
     match result {
         Ok(_) => existed = true,
         Err(e) => match e.kind() {
-            ErrorKind::NotFound => { log_info!("Unable to find script-output directory, skipping renaming."); existed = false; }
-            ErrorKind::PermissionDenied => todo!("Encourage user to run with elevated permissions."),
+            ErrorKind::NotFound => {
+                log_info!("Unable to find script-output directory, skipping renaming.");
+                existed = false;
+            }
+            ErrorKind::PermissionDenied => {
+                todo!("Encourage user to run with elevated permissions.")
+            }
             _ => todo!("Return error type"),
-        }
+        },
     }
     log_info!("Creating temporary script-output directory");
 
@@ -77,7 +100,11 @@ pub fn update() {
     let result = run_with_arg("--dump-prototype-locale");
     //TODO: handle result. Check if successful.
 
+    let mut data = script_output.clone();
+    data.push("data-raw-dump.json");
+    let result = read_json(&data);
     //TODO: Do stuff with the information.
+
 
     log_info!("Deleting temporary script-output directory.");
     let result = fs::remove_dir(&script_output);
