@@ -1,14 +1,4 @@
-mod fluids;
-mod items;
-mod recipes;
-mod utils;
-
-use fluids::FLUIDS;
-use items::ITEMS;
-use recipes::RECIPES;
-use utils::FactorioType;
+use atomize::{self, Atom, a as atom};
 
 fn main() {
-    for key in FLUIDS.keys() {
-    }
 }

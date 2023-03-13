@@ -1,6 +1,3 @@
-extern crate lazy_static;
-
-pub mod fluids;
-pub mod items;
-pub mod recipes;
-pub mod utils;
+pub mod common;
+pub mod deserialize;
+pub mod dump_to_ron;
