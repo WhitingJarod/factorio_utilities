@@ -1,6 +1,6 @@
 use atomize::Atom;
 
-struct Item {
+pub struct Item {
     id: Atom,
     stack_size: u16,
 }
